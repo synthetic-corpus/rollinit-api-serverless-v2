@@ -24,13 +24,19 @@ export function parseUserId(jwtToken: string): string {
   }
 
 export async function verifyToken(authHeader: string): Promise<JwtPayload> {
-    const token = getToken(authHeader)
+    try{const token = getToken(authHeader)
     //console.log("The token I got was.... ",token)
     const jwt: Jwt = decode(token, { complete: true }) as Jwt
     //console.log("I tried to decode and got ",jwt)
     const rawCert: string = await matchToKey(jwt.header.kid)
     const cert = stringToPEM(rawCert)
-    return verify(token, cert, { algorithms: ['RS256']}) as JwtPayload
+    //console.log("Raw Cert Acquired!")
+    const returnabel = verify(token, cert, { algorithms: ['RS256']}) as JwtPayload
+    console.log(returnabel)
+    return returnabel}
+    catch(e){
+        throw new Error(e)
+    }
   }
   
   function getToken(authHeader: string): string {
@@ -41,7 +47,7 @@ export async function verifyToken(authHeader: string): Promise<JwtPayload> {
       throw new Error('Invalid authentication header')
     const split = authHeader.split(/[ ,]+/)
     const token = split[1].replace('"','')
-    console.log("Get Token gets ",token)
+    //console.log("Get Token gets ",token)
     return token
   }
   
@@ -56,6 +62,7 @@ export async function verifyToken(authHeader: string): Promise<JwtPayload> {
   
       return x5cKey
     }catch(e){
+      throw new Error(`Unable to Match any Keys. x5cKey not extracted.`)
       return ''
     }
     

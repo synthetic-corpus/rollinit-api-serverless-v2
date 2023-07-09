@@ -11,13 +11,20 @@ const serverlessConfiguration: AWS = {
   provider: {
     name: 'aws',
     runtime: 'nodejs16.x',
+    region: 'us-west-2',
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
     },
     environment: {
+
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
+      AUTH_URL: '${env:AUTH_URL}',
+      MONGO_ADDRESS: '${env:MONGO_ADDRESS}',
+      MONGO_USER: '${env:MONGO_USER}',
+      mongoPass: '${env:MONGO_PASS}',
+      mongoPrefix: '${env:MONGO_PREFIX}'
     },
   },
   // import the function via paths
