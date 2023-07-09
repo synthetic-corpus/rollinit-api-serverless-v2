@@ -2,6 +2,7 @@ import type { AWS } from '@serverless/typescript';
 
 import hello from '@functions/hello';
 import {userCreate, userRetrieve} from '@functions/users'
+import { authHandler } from '@functions/auth'
 
 const serverlessConfiguration: AWS = {
   service: 'rollinit-api-serverless-v2',
@@ -20,7 +21,8 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: { 
+  functions: {
+    authHandler, 
     hello,
     userCreate,
     userRetrieve

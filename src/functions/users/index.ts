@@ -6,6 +6,7 @@ export const userCreate = {
   events: [
     {
       http: {
+        authorizer: 'authHandler',
         method: 'post',
         path: 'user',
         request: {
@@ -23,6 +24,7 @@ export const userRetrieve = {
     events: [
       {
         http: {
+          authorizer: 'authHandler',
           method: 'get',
           path: 'user/self'
         },
