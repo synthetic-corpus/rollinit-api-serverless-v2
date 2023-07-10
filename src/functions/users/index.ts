@@ -31,3 +31,29 @@ export const userRetrieve = {
       },
     ],
   };
+
+export const userUpdate = {
+  handler: `${handlerPath(__dirname)}/userhandlers.userUpdateMiddy`,
+    events: [
+      {
+        http: {
+          authorizer: 'authHandler',
+          method: 'patch',
+          path: 'user/patch'
+        },
+      },
+    ],
+}
+
+export const userDelete = {
+  handler: `${handlerPath(__dirname)}/userhandlers.userDeleteMiddy`,
+    events: [
+      {
+        http: {
+          authorizer: 'authHandler',
+          method: 'delete',
+          path: 'user/delete'
+        },
+      },
+    ],
+}
