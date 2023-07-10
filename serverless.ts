@@ -3,6 +3,7 @@ import type { AWS } from '@serverless/typescript';
 import hello from '@functions/hello';
 import {userCreate, userRetrieve, userUpdate, userDelete} from '@functions/users'
 import {tentCreate, tentRetrieve, tentRetrieveAll, tentUpdate, tentDelete } from '@functions/tents'
+import { encounterCreate, encounterRetrieve, encounterRetrieveAll, encounterUpdate, encounterDelete } from '@functions/encounters';
 import { authHandler } from '@functions/auth'
 
 const serverlessConfiguration: AWS = {
@@ -42,7 +43,13 @@ const serverlessConfiguration: AWS = {
     tentRetrieve,
     tentRetrieveAll,
     tentUpdate,
-    tentDelete
+    tentDelete,
+    // Encounters
+    encounterCreate,
+    encounterRetrieve,
+    encounterRetrieveAll,
+    encounterUpdate,
+    encounterDelete
   },
   package: { individually: true },
   custom: {

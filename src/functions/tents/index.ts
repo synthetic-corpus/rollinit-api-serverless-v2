@@ -78,7 +78,7 @@ export const tentDelete = {
         http: {
           authorizer: 'authHandler',
           method: 'delete',
-          path: 'user/delete'
+          path: 'tent/{id}'
         },
       },
     ],
