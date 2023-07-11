@@ -1,21 +1,25 @@
 export const encounterHTTP = {
     type: "object",
     properties: {
-      player: { type: 'string' },
-      character: {type: 'string'},
-      initiative: {type: 'string'},
-      spell_dc: {type: 'string'},
-      passive_perception: {type: 'string'},
-      ac: {type: 'number'},
-      notes: {type: 'string'}
+      _campaign_id: {type: 'string'},
+      name: {type: 'string'}
     },
-    required: ['player','character','initiative']
+    required: ['name'],
+    npcs: {
+      "type": "array",
+      "items": {"$ref": "#/definitions/npc"}
+    },
+    definitions: {
+      "npc": {
+        type: "object",
+        properties: {
+          name: {type: 'string'},
+          initiative: {type: 'number'},
+          ac: {type: 'number'},
+          notes: {type: 'string'},
+          roll_method: {type: 'string'}
+        },
+        required: ['name','initiative']
+      }
+    }
   }
-
-const npc = {
-  name: {type: 'string'},
-  initiative: {type: 'string'},
-  ac: {type: 'string'},
-  notes: {type: 'string'},
-  roll_method: {type: 'string'}
-}
