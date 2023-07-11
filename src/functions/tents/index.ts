@@ -64,8 +64,8 @@ export const tentUpdate = {
       {
         http: {
           authorizer: 'authHandler',
-          method: 'patch/{id}',
-          path: 'tent'
+          method: 'patch',
+          path: 'tent/{id}'
         },
       },
     ],

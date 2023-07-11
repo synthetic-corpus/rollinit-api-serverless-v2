@@ -64,8 +64,8 @@ export const encounterUpdate = {
       {
         http: {
           authorizer: 'authHandler',
-          method: 'patch/{id}',
-          path: 'encounters'
+          method: 'patch',
+          path: 'encounters/{id}'
         },
       },
     ],
@@ -78,7 +78,7 @@ export const encounterDelete = {
         http: {
           authorizer: 'authHandler',
           method: 'delete',
-          path: 'encounters/{encounter_id}'
+          path: 'encounters/{id}'
         },
       },
     ],

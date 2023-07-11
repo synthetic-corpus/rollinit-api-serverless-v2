@@ -1,5 +1,5 @@
 // User CRUD exported
-
+import { getUserId } from "@functions/auth/authUtils";
 import type { ValidatedEventAPIGatewayProxyEvent } from "@libs/api-gateway";
 import { formatJSONResponse } from "@libs/api-gateway";
 import { middyfy } from "@libs/lambda";
@@ -15,8 +15,10 @@ const userCreate: ValidatedEventAPIGatewayProxyEvent<typeof userHTTP> = async (e
 }
 
 const userRetrieve: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+    const user_id = getUserId(event)
     return formatJSONResponse({
         message: "retrieve user was called!",
+        extracted_id: user_id,
         event
     })
 }

@@ -9,7 +9,7 @@ import { config } from '../../../src/config'
 export function getUserId(event: APIGatewayProxyEvent): string | undefined {
     const authorization = event.headers.authorization as string
     if(authorization){
-        console.log(authorization)
+        //console.log(authorization)
         const split: string[] = authorization.split(/[ %,]+/)
         const jwtToken = split[1].replace('"','')
         return parseUserId(jwtToken)
@@ -19,7 +19,7 @@ export function getUserId(event: APIGatewayProxyEvent): string | undefined {
 export function parseUserId(jwtToken: string): string {
     //console.log("parsing user id with...",jwtToken)
     const decodedJwt = decode(jwtToken) as JwtPayload
-    console.log("paresed user id payload as....",decodedJwt.sub)
+    //console.log("paresed user id payload as....",decodedJwt.sub)
     return decodedJwt.sub
   }
 
