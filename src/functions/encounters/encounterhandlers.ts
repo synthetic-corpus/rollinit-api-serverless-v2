@@ -6,40 +6,44 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } f
 import { formatJSONResponse } from "@libs/api-gateway";
 import { encounterHTTP } from "./schema";
 import { middyfy } from "@libs/lambda";
+import { getUserId } from '@functions/auth/authUtils'
+import * as encounters from "@business/encounter.logic"
+
 
 const encounterCreate: ValidatedEventAPIGatewayProxyEvent<typeof encounterHTTP> = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-    return formatJSONResponse({
-        message: "encounter create called!",
-        event
-    })
+    // Adds a new encounter
+    const user_id = getUserId(event)
+    const body = JSON.parse(event.body)
+    const returnThis = await encounters.createEncounter(user_id,body)
+    return formatJSONResponse(returnThis.code, returnThis.data) // Must return with formatJSONResponse
 }
 
 const encounterRetrieve: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-    return formatJSONResponse({
-        message: "retrieve encounter was called!",
-        event
-    })
+    const user_id = getUserId(event)
+    const body = JSON.parse(event.body)
+    const returnThis = await encounters.getEncounter(user_id,body)
+    return formatJSONResponse(returnThis.code, returnThis.data) // Must return with formatJSONResponse
 }
 
 const encounterRetrieveAll: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-    return formatJSONResponse({
-        message: "retrieve encounter was called!",
-        event
-    })
+    const user_id = getUserId(event)
+    const returnThis = await encounters.getAllEncounters({_user_id: user_id})
+    return formatJSONResponse(returnThis.code, returnThis.data) // Must return with formatJSONResponse
 }
 
 const encounterPatch: ValidatedEventAPIGatewayProxyEvent<typeof encounterHTTP> = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-    return formatJSONResponse({
-        message: "encounter patch called!",
-        event
-    })
+    const user_id = getUserId(event)
+    const body = JSON.parse(event.body)
+    const id = event.pathParameters.id
+    const returnThis = await encounters.patchEncounter(user_id,id,body)
+    return formatJSONResponse(returnThis.code, returnThis.data) // Must return with formatJSONResponse
 }
 
 const encounterDelete: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-    return formatJSONResponse({
-        message: "delete encounter was called!",
-        event
-    })
+    const user_id = getUserId(event)
+    const id = event.pathParameters.id
+    const returnThis = await encounters.deleteEncounter(user_id,id)
+    return formatJSONResponse(returnThis.code, returnThis.data) // Must return with formatJSONResponse
 }
 
 export const encounterCreateMiddy = middyfy(encounterCreate)

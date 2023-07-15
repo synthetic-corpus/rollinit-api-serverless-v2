@@ -1,6 +1,6 @@
 import { APIGatewayTokenAuthorizerEvent, APIGatewayAuthorizerResult, } from 'aws-lambda'
 import { verifyToken } from './authUtils'
-import { middyfy } from '@libs/lambda'
+
 
 export const handler = async (event: APIGatewayTokenAuthorizerEvent): Promise<APIGatewayAuthorizerResult> => {
     //console.log("Auth handler called!")
