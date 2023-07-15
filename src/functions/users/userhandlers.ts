@@ -5,37 +5,54 @@ import { formatJSONResponse } from "@libs/api-gateway";
 import { middyfy } from "@libs/lambda";
 import { userHTTP } from './schema'
 import { APIGatewayProxyEvent, APIGatewayProxyHandler, APIGatewayProxyResult } from 'aws-lambda'
+import * as users from "@business/user.logic"
 
 const userCreate: ValidatedEventAPIGatewayProxyEvent<typeof userHTTP> = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     // Simply records a user name and ID.
-    return formatJSONResponse({
-        message: "user Creat called!",
-        event
-    })
+    const user_id = getUserId(event)
+    const body = JSON.parse(event.body)
+    const returnThis = await users.createUser(user_id,body.name)
+    return formatJSONResponse(returnThis.code,returnThis.data)
 }
 
 const userRetrieve: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+    // Gets info on one user
     const user_id = getUserId(event)
-    return formatJSONResponse({
-        message: "retrieve user was called!",
-        extracted_id: user_id,
-        event
-    })
+    try{
+        const returnThis = await users.getUser(user_id)
+        return formatJSONResponse(returnThis.code, returnThis.data)
+    }catch(e){
+        console.log(e)
+        return formatJSONResponse(403,{message: "this user could not be authenticated"})
+    }
 }
 
 const userPatch: ValidatedEventAPIGatewayProxyEvent<typeof userHTTP> = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     // could update the user name sometime
-    return formatJSONResponse({
-        message: "user patch called!",
-        event
-    })
+    const user_id = getUserId(event)
+    try{
+        const update = JSON.parse(event.body)
+        const returnThis = await users.patchUser(user_id,update)
+        return formatJSONResponse(returnThis.code, returnThis.data)
+    }catch(e){
+        console.log(e)
+        return formatJSONResponse(403,{message: "this user could not be authenticated"})
+    }
 }
 
 const userDelete: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-    return formatJSONResponse({
-        message: "delete user was called!",
-        event
-    })
+    // Delete a user. Not likely to ever be used, but here for the CRUD.
+    const user_id = getUserId(event)
+    if (!user_id){
+        return formatJSONResponse(400, {"message": "Could not find the user!"})
+    }
+    try{
+        const returnThis = await users.deleteUser(user_id)
+        return formatJSONResponse(returnThis.code, returnThis.data)
+    }catch(e){
+        console.log(e)
+        return formatJSONResponse(403,{message: "this user could not be authenticated"})
+    }
 }
 
 export const userCreateMiddy = middyfy(userCreate)

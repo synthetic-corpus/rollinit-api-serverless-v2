@@ -7,7 +7,8 @@ import { APIGatewayProxyEvent } from 'aws-lambda'
 import { config } from '../../../src/config'
 
 export function getUserId(event: APIGatewayProxyEvent): string | undefined {
-    const authorization = event.headers.authorization as string
+  // Extract a user Id from a JSON web token. User ID comes from Auth0 ultimately. 
+  const authorization = event.headers.authorization as string
     if(authorization){
         //console.log(authorization)
         const split: string[] = authorization.split(/[ %,]+/)
@@ -40,7 +41,7 @@ export async function verifyToken(authHeader: string): Promise<JwtPayload> {
   }
   
   function getToken(authHeader: string): string {
-    //console.log(authHeader)
+    // Extract token from the authorization header
     if (!authHeader) throw new Error('No authentication header')
   
     if (!authHeader.toLowerCase().startsWith('bearer '))
