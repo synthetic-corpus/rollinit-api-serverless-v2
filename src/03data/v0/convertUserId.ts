@@ -1,7 +1,9 @@
 import { UserModel } from "./schemas/schema";
+import { myDatabase } from "./database";
 
 export async function convertUserId(userId: String): Promise<string>{
     try{
+        myDatabase
         const mongoUser = await UserModel.findOne({_authID: userId}).exec()
         console.log("converter tool: mongo Searched with: ",userId)
         console.log("converter tool: mongo found: ",mongoUser)

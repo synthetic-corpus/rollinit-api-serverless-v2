@@ -7,7 +7,7 @@ export const handler = async (event: APIGatewayTokenAuthorizerEvent): Promise<AP
     try {
         // console.log(event.authorizationToken)
         const jwtToken = await verifyToken(event.authorizationToken)
-        console.log(jwtToken)
+        //console.log(jwtToken)
         return {
           principalId: jwtToken.sub,
           policyDocument: {

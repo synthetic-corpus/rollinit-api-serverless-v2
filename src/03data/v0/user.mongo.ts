@@ -1,9 +1,12 @@
 import { HttpReplyMessage } from '@interfaces/responses.interface'
 import { CampaignModel, UserModel } from './schemas/schema'
 import { UserPatch } from '@interfaces/user.interface'
+import { myDatabase } from './database'
+
 
 export async function createUser(userId: String, name:string): Promise<HttpReplyMessage>{
     let reply: HttpReplyMessage
+    myDatabase; // connects to Database
     try{
         const newUser = new UserModel({_authID: userId, name: name})
         const createdUser = await newUser.save()
@@ -19,6 +22,7 @@ export async function createUser(userId: String, name:string): Promise<HttpReply
 
 export async function retrieveUser(userId: String): Promise<HttpReplyMessage>{
     let reply: HttpReplyMessage
+    myDatabase
     try{
         const user = await UserModel.findById(userId).exec()
         if(user){

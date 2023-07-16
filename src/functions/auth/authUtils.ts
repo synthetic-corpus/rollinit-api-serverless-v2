@@ -8,9 +8,10 @@ import { config } from '../../../src/config'
 
 export function getUserId(event: APIGatewayProxyEvent): string | undefined {
   // Extract a user Id from a JSON web token. User ID comes from Auth0 ultimately. 
-  const authorization = event.headers.authorization as string
+  console.log("event at get user id ",event)
+  const authorization = event.headers.authorization as string || event.headers.Authorization
     if(authorization){
-        //console.log(authorization)
+        console.log(authorization)
         const split: string[] = authorization.split(/[ %,]+/)
         const jwtToken = split[1].replace('"','')
         return parseUserId(jwtToken)

@@ -25,8 +25,8 @@ const serverlessConfiguration: AWS = {
       AUTH_URL: '${env:AUTH_URL}',
       MONGO_ADDRESS: '${env:MONGO_ADDRESS}',
       MONGO_USER: '${env:MONGO_USER}',
-      mongoPass: '${env:MONGO_PASS}',
-      mongoPrefix: '${env:MONGO_PREFIX}'
+      MONGO_PASS: '${env:MONGO_PASS}',
+      MONGO_PREFIX: '${env:MONGO_PREFIX}'
     },
   },
   // import the function via paths

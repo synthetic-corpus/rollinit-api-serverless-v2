@@ -4,7 +4,9 @@ import { convertUserId } from '../../03data/v0/convertUserId';
 import { HttpReplyMessage } from '@interfaces/responses.interface'
 
 
+
 export async function createUser(userId: String, name: string): Promise<HttpReplyMessage>{
+    console.log("passing create USER layer")
     const reply: HttpReplyMessage = await DB.createUser(userId, name);
     return reply
 }
