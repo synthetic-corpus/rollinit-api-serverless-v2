@@ -2,8 +2,10 @@ import { HttpReplyMessage } from '@interfaces/responses.interface'
 import { EncounterModel } from './schemas/encounter.schema'
 import { EncounterPatch,Encounter } from '@interfaces/encounter.interface'
 import { stringify } from 'querystring'
+import { myDatabase } from './database'
 
 export async function createEncounter(encounter: Encounter): Promise<HttpReplyMessage>{
+    myDatabase
     let reply: HttpReplyMessage
     try{
         const newEncounter = new EncounterModel(encounter)
@@ -17,6 +19,7 @@ export async function createEncounter(encounter: Encounter): Promise<HttpReplyMe
 }
 
 export async function retrieveEncounter(userId: String, encounterId: String): Promise<HttpReplyMessage>{
+    myDatabase
     let reply: HttpReplyMessage
     try{
         const encounter = await EncounterModel.findOne({_user_id: userId, _id: encounterId}).exec()
@@ -33,6 +36,7 @@ export async function retrieveEncounter(userId: String, encounterId: String): Pr
 }
 
 export async function searchEncounters(search: {_user_id: string, _campaign_id?: string}){
+    myDatabase
     let reply: HttpReplyMessage
     try{
         const encounters = await EncounterModel.find(search)
@@ -50,6 +54,7 @@ export async function searchEncounters(search: {_user_id: string, _campaign_id?:
 }
 
 export async function updateEncounter(userId: string, encounterId: string, encounterPatch: EncounterPatch): Promise<HttpReplyMessage>{
+    myDatabase
     let reply: HttpReplyMessage;
     try{
         const updatedEncounter = await EncounterModel.findOneAndUpdate({_user_id: userId, _id: encounterId},encounterPatch)
@@ -76,6 +81,7 @@ export async function updateEncounter(userId: string, encounterId: string, encou
 }
 
 export async function deleteEncounter(userId: string, encounterId: string): Promise<HttpReplyMessage>{
+    myDatabase
     let reply: HttpReplyMessage
     try{
         const deletedEncounter = await EncounterModel.findOneAndDelete({_user_id: userId, _id: encounterId});

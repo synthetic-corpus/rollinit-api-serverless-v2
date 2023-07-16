@@ -1,8 +1,10 @@
 import { HttpReplyMessage } from '@interfaces/responses.interface'
 import { CampaignModel } from './schemas/schema'
 import { Campaign, CampaignPatch } from "@interfaces/campaign.interface";
+import { myDatabase } from './database';
 
 export async function createCampaign(campaign: Campaign): Promise<HttpReplyMessage>{
+    myDatabase
     let reply: HttpReplyMessage
     try{
         const newCampaign = new CampaignModel(campaign)
@@ -19,6 +21,7 @@ export async function createCampaign(campaign: Campaign): Promise<HttpReplyMessa
 }
 
 export async function retrieveCampaign(userId: String, CampaignId: String): Promise<HttpReplyMessage>{
+    myDatabase
     let reply: HttpReplyMessage
     try{
         const thisCampaign = await CampaignModel.findById(CampaignId)
@@ -39,6 +42,7 @@ export async function retrieveCampaign(userId: String, CampaignId: String): Prom
 }
 
 export async function retrieveAllCampaigns(userId: String): Promise<HttpReplyMessage>{
+    myDatabase
     let reply: HttpReplyMessage
     try{
         const query = {_user_id: userId}
@@ -56,6 +60,7 @@ export async function retrieveAllCampaigns(userId: String): Promise<HttpReplyMes
 }
 
 export async function updateCampaign(userId: String, campaignId: String, campaignPatch: CampaignPatch): Promise<HttpReplyMessage>{
+    myDatabase
     let reply: HttpReplyMessage;
     const query = {_id: campaignId,_user_id: userId}
     try{
@@ -75,6 +80,7 @@ export async function updateCampaign(userId: String, campaignId: String, campaig
 }
 
 export async function deleteCampaign(userId: String, campaignId: String): Promise<HttpReplyMessage>{
+    myDatabase
     let reply: HttpReplyMessage
     const query = {_id: campaignId,_user_id: userId}
     try{

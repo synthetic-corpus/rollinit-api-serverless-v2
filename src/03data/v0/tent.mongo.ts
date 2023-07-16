@@ -1,9 +1,11 @@
 import { HttpReplyMessage } from '@interfaces/responses.interface'
 import { TentModel } from './schemas/schema'
 import { Tent, TentPatch } from "@interfaces/tent.interface";
+import { myDatabase } from './database';
 
 
 export async function createTent(tent: Tent): Promise<HttpReplyMessage>{
+    myDatabase
     let reply: HttpReplyMessage
     try{
         const newTent = new TentModel(tent)
@@ -20,6 +22,7 @@ export async function createTent(tent: Tent): Promise<HttpReplyMessage>{
 }
 
 export async function retrieveTent(userId: String, TentId: String): Promise<HttpReplyMessage>{
+    myDatabase
     let reply: HttpReplyMessage
     try{
         const thisTent = await TentModel.findById(TentId)
@@ -40,6 +43,7 @@ export async function retrieveTent(userId: String, TentId: String): Promise<Http
 }
 
 export async function retrieveAllTents(userId: String): Promise<HttpReplyMessage>{
+    myDatabase
     let reply: HttpReplyMessage
     try{
         const query = {_user_id: userId}
@@ -57,6 +61,7 @@ export async function retrieveAllTents(userId: String): Promise<HttpReplyMessage
 }
 
 export async function updateTent(userId: String, tentId: String, tentPatch: TentPatch): Promise<HttpReplyMessage>{
+    myDatabase
     let reply: HttpReplyMessage;
     const query = {_id: tentId,_user_id: userId}
     try{
@@ -76,6 +81,7 @@ export async function updateTent(userId: String, tentId: String, tentPatch: Tent
 }
 
 export async function deleteTent(userId: String, tentId: String): Promise<HttpReplyMessage>{
+    myDatabase
     let reply: HttpReplyMessage
     const query = {_id: tentId,_user_id: userId}
     try{
