@@ -39,7 +39,7 @@ export const userUpdate = {
         http: {
           authorizer: 'authHandler',
           method: 'patch',
-          path: 'user/patch'
+          path: 'user/self'
         },
       },
     ],
@@ -52,7 +52,7 @@ export const userDelete = {
         http: {
           authorizer: 'authHandler',
           method: 'delete',
-          path: 'user/delete'
+          path: 'user/self'
         },
       },
     ],

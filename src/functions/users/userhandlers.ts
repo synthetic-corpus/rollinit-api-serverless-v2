@@ -6,7 +6,7 @@ import { middyfy } from "@libs/lambda";
 import { userHTTP } from './schema'
 import { APIGatewayProxyEvent, APIGatewayProxyHandler, APIGatewayProxyResult } from 'aws-lambda'
 import * as users from "@business/user.logic"
-import { myDatabase } from "@data/database";
+
 
 const userCreate: ValidatedEventAPIGatewayProxyEvent<typeof userHTTP> = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     // Simply records a user name and ID.
@@ -33,7 +33,7 @@ const userRetrieve: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent)
 
 const userPatch: ValidatedEventAPIGatewayProxyEvent<typeof userHTTP> = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     // could update the user name sometime
-    myDatabase
+
     const user_id = getUserId(event)
     try{
         const update = JSON.parse(event.body)
@@ -47,7 +47,7 @@ const userPatch: ValidatedEventAPIGatewayProxyEvent<typeof userHTTP> = async (ev
 
 const userDelete: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     // Delete a user. Not likely to ever be used, but here for the CRUD.
-    myDatabase
+
     const user_id = getUserId(event)
     if (!user_id){
         return formatJSONResponse(400, {"message": "Could not find the user!"})
@@ -63,5 +63,5 @@ const userDelete: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): 
 
 export const userCreateMiddy = middyfy(userCreate)
 export const userRetrieveMiddy = middyfy(userRetrieve)
-export const userPatchMiddy = middyfy(userPatch)
+export const userUpdateMiddy = middyfy(userPatch)
 export const userDeleteMiddy = middyfy(userDelete)

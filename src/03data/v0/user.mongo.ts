@@ -39,6 +39,7 @@ export async function retrieveUser(userId: String): Promise<HttpReplyMessage>{
 
 export async function updateUser(userId: String, userPatch: UserPatch): Promise<HttpReplyMessage>{
     let reply: HttpReplyMessage;
+    myDatabase
     try{
         const updatedUser = await UserModel.findByIdAndUpdate(userId,userPatch)
         if (updatedUser){
@@ -63,6 +64,7 @@ export async function updateUser(userId: String, userPatch: UserPatch): Promise<
 
 export async function deleteUser(userId: String): Promise<HttpReplyMessage>{
     let reply: HttpReplyMessage
+    myDatabase
     try{
         const deletedUser = await UserModel.findByIdAndDelete(userId);
         if(deletedUser){

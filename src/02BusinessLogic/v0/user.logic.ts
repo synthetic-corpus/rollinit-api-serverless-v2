@@ -5,13 +5,13 @@ import { HttpReplyMessage } from '@interfaces/responses.interface'
 
 
 
-export async function createUser(userId: String, name: string): Promise<HttpReplyMessage>{
+export async function createUser(userId: string, name: string): Promise<HttpReplyMessage>{
     console.log("passing create USER layer")
     const reply: HttpReplyMessage = await DB.createUser(userId, name);
     return reply
 }
 
-export async function getUser(userId: String): Promise<HttpReplyMessage>{
+export async function getUser(userId: string): Promise<HttpReplyMessage>{
     const db_uuid = await convertUserId(userId)
     const reply: HttpReplyMessage = await DB.retrieveUser(db_uuid)
     console.log("logic layer searches with: ",userId, "which converted to ",db_uuid)
@@ -19,13 +19,13 @@ export async function getUser(userId: String): Promise<HttpReplyMessage>{
     return reply
 }
 
-export async function patchUser(userId: String, update: User.UserPatch): Promise<HttpReplyMessage>{
+export async function patchUser(userId: string, update: User.UserPatch): Promise<HttpReplyMessage>{
     const db_uuid = await convertUserId(userId)
     const reply: HttpReplyMessage = await DB.updateUser(db_uuid,update)
     return reply
 }
 
-export async function deleteUser(userId: String): Promise<HttpReplyMessage>{
+export async function deleteUser(userId: string): Promise<HttpReplyMessage>{
     const db_uuid = await convertUserId(userId)
     const reply: HttpReplyMessage = await DB.deleteUser(db_uuid)
     return reply
