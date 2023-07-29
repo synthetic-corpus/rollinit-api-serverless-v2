@@ -22,12 +22,21 @@ const serverlessConfiguration: AWS = {
 
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
-      AUTH_URL: '${env:AUTH_URL}',
-      MONGO_ADDRESS: '${env:MONGO_ADDRESS}',
-      MONGO_USER: '${env:MONGO_USER}',
-      MONGO_PASS: '${env:MONGO_PASS}',
-      MONGO_PREFIX: '${env:MONGO_PREFIX}'
+      AUTH_URL: '${ssm:auth_url}', //'${env:AUTH_URL}',
+      MONGO_ADDRESS: '${ssm:mongo_url}'[1],//'${env:MONGO_ADDRESS}',
+      MONGO_USER: '${ssm:mongo_user}',//'${env:MONGO_USER}',
+      MONGO_PASS: '${ssm:mongo_password}',//'${env:MONGO_PASS}',
+      MONGO_PREFIX: '${ssm:mongo_url}'[0]//'${env:MONGO_PREFIX}'
     },
+    iamRoleStatements: [
+      {
+        Effect: "Allow",
+        Action: [
+          "ssm:GetParameters"
+        ],
+        Resource: "*"
+      }
+    ]
   },
   // import the function via paths
   functions: {
