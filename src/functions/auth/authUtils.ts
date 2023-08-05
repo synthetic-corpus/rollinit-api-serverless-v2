@@ -9,12 +9,15 @@ import { config } from '../../../src/config'
 export function getUserId(event: APIGatewayProxyEvent): string | undefined {
   // Extract a user Id from a JSON web token. User ID comes from Auth0 ultimately. 
   //console.log("event at get user id ",event)
-  const authorization = event.headers.authorization as string || event.headers.Authorization
+  const authorization = event.headers.authorization as string || event.headers.Authorization as string
     if(authorization){
         //console.log(authorization)
         const split: string[] = authorization.split(/[ %,]+/)
         const jwtToken = split[1].replace('"','')
         return parseUserId(jwtToken)
+    }else{
+      console.log("Authorization header not found. May be issue of case sensitivity!")
+      console.log(event)
     }
 }
 

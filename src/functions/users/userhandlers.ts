@@ -21,7 +21,7 @@ const userCreate: ValidatedEventAPIGatewayProxyEvent<typeof userHTTP> = async (e
 const userRetrieve: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     // Gets info on one user
     const user_id = getUserId(event)
-    console.log("User ad at Lambda: ",user_id)
+    console.log("User Id at Lambda: ",user_id)
     try{
         const returnThis = await users.getUser(user_id)
         return formatJSONResponse(returnThis.code, returnThis.data)
