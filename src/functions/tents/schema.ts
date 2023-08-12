@@ -3,9 +3,9 @@ export const tentHTTP = {
     properties: {
       player: { type: 'string' },
       character: {type: 'string'},
-      initiative: {type: 'string'},
-      spell_dc: {type: 'string'},
-      passive_perception: {type: 'string'},
+      initiative: {type: 'number'},
+      spell_dc: {type: 'number'},
+      passive_perception: {type: 'number'},
       ac: {type: 'number'},
       notes: {type: 'string'}
     },
