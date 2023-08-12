@@ -30,12 +30,7 @@ export const tentRetrieve = {
           cors: true,
           authorizer: 'authHandler',
           method: 'get',
-          path: 'tent/{id}',
-          request: {
-            schemas: {
-              'application/json': tentHTTP,
-            },
-          },
+          path: 'tent/{id}'
         },
       },
     ],

@@ -30,12 +30,7 @@ export const encounterRetrieve = {
           cors: true,
           authorizer: 'authHandler',
           method: 'get',
-          path: 'encounters/{id}',
-          request: {
-            schemas: {
-              'application/json': encounterHTTP,
-            },
-          },
+          path: 'encounters/{id}'
         },
       },
     ],
@@ -64,10 +59,15 @@ export const encounterUpdate = {
           cors: true,
           authorizer: 'authHandler',
           method: 'patch',
-          path: 'encounters/{id}'
-        },
-      },
-    ],
+          path: 'encounters/{id}',
+          request: {
+            schemas: {
+              'application/json': encounterHTTP,
+            }
+          }
+        }
+      }
+    ]
 }
 
 export const encounterDelete = {
