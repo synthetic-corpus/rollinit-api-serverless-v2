@@ -11,7 +11,7 @@ import * as tents from '@business/tent.logic'
 
 const tentCreate: ValidatedEventAPIGatewayProxyEvent<typeof tentHTTP> = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     const user_id = getUserId(event)
-    const body = JSON.parse(event.body)
+    const body: any = event.body
     const returnThis = await tents.createTent(user_id,body)
     return formatJSONResponse(returnThis.code,returnThis.data)
 }
@@ -31,7 +31,7 @@ const tentRetrieveAll: APIGatewayProxyHandler = async (event: APIGatewayProxyEve
 const tentPatch: ValidatedEventAPIGatewayProxyEvent<typeof tentHTTP> = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     const user_id = getUserId(event)
     const id = event.pathParameters.id
-    const patch = JSON.parse(event.body)
+    const patch: any = event.body as Object
     const returnThis = await tents.patchTent(user_id,id,patch)
     return formatJSONResponse(returnThis.code,returnThis.data)
 }
@@ -46,5 +46,5 @@ const tentDelete: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): 
 export const tentCreateMiddy = middyfy(tentCreate)
 export const tentRetrieveMiddy = middyfy(tentRetrieve)
 export const tentRetrieveAllMiddy = middyfy(tentRetrieveAll)
-export const tentPatchMiddy = middyfy(tentPatch)
+export const tentUpdateMiddy = middyfy(tentPatch)
 export const tentDeleteMiddy = middyfy(tentDelete)
