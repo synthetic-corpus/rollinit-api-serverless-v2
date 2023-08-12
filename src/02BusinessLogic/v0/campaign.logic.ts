@@ -4,7 +4,7 @@ import { convertUserId } from '../../03data/v0/convertUserId';
 import { HttpReplyMessage } from '@interfaces/responses.interface'
 
 
-export async function createCampaign(userId: String, campaignPost: Campaign.CampaignHttp): Promise<HttpReplyMessage>{
+export async function createCampaign(userId: string, campaignPost: Campaign.CampaignHttp): Promise<HttpReplyMessage>{
     const db_uuid = await convertUserId(userId)
     const campaign: Campaign.Campaign = {
         _user_id: db_uuid,
@@ -28,13 +28,13 @@ export async function getAllCampaigns(user_id: string): Promise<HttpReplyMessage
     return reply
 }
 
-export async function patchCampaign(userId: String, campaignId: string, update: Campaign.CampaignPatch): Promise<HttpReplyMessage>{
+export async function patchCampaign(userId: string, campaignId: string, update: Campaign.CampaignPatch): Promise<HttpReplyMessage>{
     const db_uuid = await convertUserId(userId)
     const reply: HttpReplyMessage = await DB.updateCampaign(db_uuid,campaignId,update)
     return reply
 }
 
-export async function deleteCampaign(userId: String, campaignId: string): Promise<HttpReplyMessage>{
+export async function deleteCampaign(userId: string, campaignId: string): Promise<HttpReplyMessage>{
     const db_uuid = await convertUserId(userId)
     const reply: HttpReplyMessage = await DB.deleteCampaign(db_uuid, campaignId)
     return reply

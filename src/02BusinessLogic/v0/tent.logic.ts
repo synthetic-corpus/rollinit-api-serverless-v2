@@ -4,7 +4,7 @@ import { convertUserId } from '../../03data/v0/convertUserId';
 import { HttpReplyMessage } from '@interfaces/responses.interface'
 
 
-export async function createTent(userId: String, tentPost: Tent.Tent): Promise<HttpReplyMessage>{
+export async function createTent(userId: string, tentPost: Tent.Tent): Promise<HttpReplyMessage>{
     const db_uuid = await convertUserId(userId)
     tentPost._user_id = db_uuid
     const reply: HttpReplyMessage = await DB.createTent(tentPost);
@@ -25,13 +25,13 @@ export async function getAllTents(userId: string): Promise<HttpReplyMessage>{
     return reply
 }
 
-export async function patchTent(userId: String, tentId: String, update: Tent.TentPatch): Promise<HttpReplyMessage>{
+export async function patchTent(userId: string, tentId: string, update: Tent.TentPatch): Promise<HttpReplyMessage>{
     const db_uuid = await convertUserId(userId)
     const reply: HttpReplyMessage = await DB.updateTent(db_uuid,tentId,update)
     return reply
 }
 
-export async function deleteTent(userId: String, tentId: String): Promise<HttpReplyMessage>{
+export async function deleteTent(userId: string, tentId: string): Promise<HttpReplyMessage>{
     const db_uuid = await convertUserId(userId)
     const reply: HttpReplyMessage = await DB.deleteTent(db_uuid, tentId)
     return reply

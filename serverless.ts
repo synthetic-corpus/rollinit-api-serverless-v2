@@ -4,6 +4,7 @@ import hello from '@functions/hello';
 import {userCreate, userRetrieve, userUpdate, userDelete} from '@functions/users'
 import {tentCreate, tentRetrieve, tentRetrieveAll, tentUpdate, tentDelete } from '@functions/tents'
 import { encounterCreate, encounterRetrieve, encounterRetrieveAll, encounterUpdate, encounterDelete } from '@functions/encounters';
+import { campaignCreate, campaignRetrieve, campaignRetrieveAll, campaignUpdate, campaignDelete } from '@functions/campaigns';
 import { authHandler } from '@functions/auth'
 
 const serverlessConfiguration: AWS = {
@@ -58,7 +59,13 @@ const serverlessConfiguration: AWS = {
     encounterRetrieve,
     encounterRetrieveAll,
     encounterUpdate,
-    encounterDelete
+    encounterDelete,
+    // Campaigns
+    campaignCreate,
+    campaignRetrieve,
+    campaignRetrieveAll,
+    campaignUpdate,
+    campaignDelete
   },
   package: { individually: true },
   custom: {

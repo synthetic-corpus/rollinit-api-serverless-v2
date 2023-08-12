@@ -15,7 +15,7 @@ export async function createCampaign(campaign: Campaign): Promise<HttpReplyMessa
             code: 503,
             message: "Internal server side error" 
         }
-        console.error(`Could Not Write user to Database \n ${e}`)
+        console.error(`Could Not Write campaign to Database \n ${e}`)
     }
     return reply
 }
@@ -35,7 +35,7 @@ export async function retrieveCampaign(userId: String, CampaignId: String): Prom
             reply = {code: 404,message: "No Campaign found!"}
         }
     }catch(e){
-        console.log(`Error on retrieving tent at database layer for tent: ${CampaignId} \n ${e}`)
+        console.log(`Error on retrieving tent at database layer for campaign: ${CampaignId} \n ${e}`)
         reply = {code: 500,message: "Internal Server Error"}
     }
     return reply
