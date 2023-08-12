@@ -7,7 +7,15 @@ export const campaignCreate = {
   events: [
     {
       http: {
-        cors: true,
+        cors: {
+          origin: "*",
+          headers: [
+            'Content-Type',
+            'Authorization',
+            'access-control-allow-origin',
+            'cache-control'
+          ]
+        },
         authorizer: 'authHandler',
         method: 'post',
         path: 'campaign',
@@ -27,7 +35,15 @@ export const campaignRetrieve = {
     events: [
       {
         http: {
-          cors: true,
+          cors: {
+            origin: "*",
+            headers: [
+              'Content-Type',
+              'Authorization',
+              'access-control-allow-origin',
+              'cache-control'
+            ]
+          },
           authorizer: 'authHandler',
           method: 'get',
           path: 'campaign/{id}'
@@ -42,7 +58,15 @@ export const campaignRetrieve = {
     events: [
       {
         http: {
-          cors: true,
+          cors: {
+            origin: "*",
+            headers: [
+              'Content-Type',
+              'Authorization',
+              'access-control-allow-origin',
+              'cache-control'
+            ]
+          },
           authorizer: 'authHandler',
           method: 'get',
           path: 'campaign'
@@ -56,7 +80,15 @@ export const campaignUpdate = {
     events: [
       {
         http: {
-          cors: true,
+          cors: {
+            origin: "*",
+            headers: [
+              'Content-Type',
+              'Authorization',
+              'access-control-allow-origin',
+              'cache-control'
+            ]
+          },
           authorizer: 'authHandler',
           method: 'patch',
           path: 'campaign/{id}',
@@ -75,7 +107,15 @@ export const campaignDelete = {
     events: [
       {
         http: {
-          cors: true,
+          cors: {
+            origin: "*",
+            headers: [
+              'Content-Type',
+              'Authorization',
+              'access-control-allow-origin',
+              'cache-control'
+            ]
+          },
           authorizer: 'authHandler',
           method: 'delete',
           path: 'campaign/{id}'

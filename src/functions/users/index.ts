@@ -10,7 +10,9 @@ export const userCreate = {
           origin: "*",
           headers: [
             'Content-Type',
-            'Authorization'
+            'Authorization',
+            'access-control-allow-origin',
+            'cache-control'
           ]
         },
         authorizer: 'authHandler',
@@ -35,7 +37,9 @@ export const userRetrieve = {
             origin: "*",
             headers: [
               'Content-Type',
-              'Authorization'
+              'Authorization',
+              'access-control-allow-origin',
+              'cache-control'
             ]
           },
           authorizer: 'authHandler',
@@ -55,7 +59,9 @@ export const userUpdate = {
             origin: "*",
             headers: [
               'Content-Type',
-              'Authorization'
+              'Authorization',
+              'access-control-allow-origin',
+              'cache-control'
             ]
           },
           authorizer: 'authHandler',
@@ -75,7 +81,9 @@ export const userDelete = {
             origin: "*",
             headers: [
               'Content-Type',
-              'Authorization'
+              'Authorization',
+              'access-control-allow-origin',
+              'cache-control'
             ]
           },
           authorizer: 'authHandler',

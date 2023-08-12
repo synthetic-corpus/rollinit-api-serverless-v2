@@ -7,7 +7,15 @@ export const encounterCreate = {
   events: [
     {
       http: {
-        cors: true,
+        cors: {
+          origin: "*",
+          headers: [
+            'Content-Type',
+            'Authorization',
+            'access-control-allow-origin',
+            'cache-control'
+          ]
+        },
         authorizer: 'authHandler',
         method: 'post',
         path: 'encounters',
@@ -27,7 +35,15 @@ export const encounterRetrieve = {
     events: [
       {
         http: {
-          cors: true,
+          cors: {
+            origin: "*",
+            headers: [
+              'Content-Type',
+              'Authorization',
+              'access-control-allow-origin',
+              'cache-control'
+            ]
+          },
           authorizer: 'authHandler',
           method: 'get',
           path: 'encounters/{id}'
@@ -42,7 +58,15 @@ export const encounterRetrieve = {
     events: [
       {
         http: {
-          cors: true,
+          cors: {
+            origin: "*",
+            headers: [
+              'Content-Type',
+              'Authorization',
+              'access-control-allow-origin',
+              'cache-control'
+            ]
+          },
           authorizer: 'authHandler',
           method: 'get',
           path: 'encounters'
@@ -56,7 +80,15 @@ export const encounterUpdate = {
     events: [
       {
         http: {
-          cors: true,
+          cors: {
+            origin: "*",
+            headers: [
+              'Content-Type',
+              'Authorization',
+              'access-control-allow-origin',
+              'cache-control'
+            ]
+          },
           authorizer: 'authHandler',
           method: 'patch',
           path: 'encounters/{id}',
@@ -75,7 +107,15 @@ export const encounterDelete = {
     events: [
       {
         http: {
-          cors: true,
+          cors: {
+            origin: "*",
+            headers: [
+              'Content-Type',
+              'Authorization',
+              'access-control-allow-origin',
+              'cache-control'
+            ]
+          },
           authorizer: 'authHandler',
           method: 'delete',
           path: 'encounters/{id}'

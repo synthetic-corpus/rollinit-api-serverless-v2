@@ -7,7 +7,15 @@ export const tentCreate = {
   events: [
     {
       http: {
-        cors: true,
+        cors: {
+          origin: "*",
+          headers: [
+            'Content-Type',
+            'Authorization',
+            'access-control-allow-origin',
+            'cache-control'
+          ]
+        },
         authorizer: 'authHandler',
         method: 'post',
         path: 'tent',
@@ -27,7 +35,15 @@ export const tentRetrieve = {
     events: [
       {
         http: {
-          cors: true,
+          cors: {
+            origin: "*",
+            headers: [
+              'Content-Type',
+              'Authorization',
+              'access-control-allow-origin',
+              'cache-control'
+            ]
+          },
           authorizer: 'authHandler',
           method: 'get',
           path: 'tent/{id}'
@@ -42,7 +58,15 @@ export const tentRetrieve = {
     events: [
       {
         http: {
-          cors: true,
+          cors: {
+            origin: "*",
+            headers: [
+              'Content-Type',
+              'Authorization',
+              'access-control-allow-origin',
+              'cache-control'
+            ]
+          },
           authorizer: 'authHandler',
           method: 'get',
           path: 'tent'
@@ -56,7 +80,15 @@ export const tentUpdate = {
     events: [
       {
         http: {
-          cors: true,
+          cors: {
+            origin: "*",
+            headers: [
+              'Content-Type',
+              'Authorization',
+              'access-control-allow-origin',
+              'cache-control'
+            ]
+          },
           authorizer: 'authHandler',
           method: 'patch',
           path: 'tent/{id}',
@@ -75,7 +107,15 @@ export const tentDelete = {
     events: [
       {
         http: {
-          cors: true,
+          cors: {
+            origin: "*",
+            headers: [
+              'Content-Type',
+              'Authorization',
+              'access-control-allow-origin',
+              'cache-control'
+            ]
+          },
           authorizer: 'authHandler',
           method: 'delete',
           path: 'tent/{id}'
