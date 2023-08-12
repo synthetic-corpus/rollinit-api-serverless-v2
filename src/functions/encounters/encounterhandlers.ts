@@ -13,15 +13,15 @@ import * as encounters from "@business/encounter.logic"
 const encounterCreate: ValidatedEventAPIGatewayProxyEvent<typeof encounterHTTP> = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     // Adds a new encounter
     const user_id = getUserId(event)
-    const body = JSON.parse(event.body)
+    const body: any = event.body as Object
     const returnThis = await encounters.createEncounter(user_id,body)
     return formatJSONResponse(returnThis.code, returnThis.data) // Must return with formatJSONResponse
 }
 
 const encounterRetrieve: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     const user_id = getUserId(event)
-    const body = JSON.parse(event.body)
-    const returnThis = await encounters.getEncounter(user_id,body)
+    const id = event.pathParameters.id
+    const returnThis = await encounters.getEncounter(user_id,id)
     return formatJSONResponse(returnThis.code, returnThis.data) // Must return with formatJSONResponse
 }
 
@@ -33,9 +33,8 @@ const encounterRetrieveAll: APIGatewayProxyHandler = async (event: APIGatewayPro
 
 const encounterPatch: ValidatedEventAPIGatewayProxyEvent<typeof encounterHTTP> = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     const user_id = getUserId(event)
-    const body = JSON.parse(event.body)
     const id = event.pathParameters.id
-    const returnThis = await encounters.patchEncounter(user_id,id,body)
+    const returnThis = await encounters.patchEncounter(user_id,id,event.body as Object)
     return formatJSONResponse(returnThis.code, returnThis.data) // Must return with formatJSONResponse
 }
 
@@ -49,5 +48,5 @@ const encounterDelete: APIGatewayProxyHandler = async (event: APIGatewayProxyEve
 export const encounterCreateMiddy = middyfy(encounterCreate)
 export const encounterRetrieveMiddy = middyfy(encounterRetrieve)
 export const encounterRetrieveAllMiddy = middyfy(encounterRetrieveAll)
-export const encounterPatchMiddy = middyfy(encounterPatch)
+export const encounterUpdateMiddy = middyfy(encounterPatch)
 export const encounterDeleteMiddy = middyfy(encounterDelete)
