@@ -7,6 +7,7 @@ export const encounterCreate = {
   events: [
     {
       http: {
+        cors: true,
         authorizer: 'authHandler',
         method: 'post',
         path: 'encounters',
@@ -26,6 +27,7 @@ export const encounterRetrieve = {
     events: [
       {
         http: {
+          cors: true,
           authorizer: 'authHandler',
           method: 'get',
           path: 'encounters/{id}',
@@ -45,14 +47,10 @@ export const encounterRetrieve = {
     events: [
       {
         http: {
+          cors: true,
           authorizer: 'authHandler',
           method: 'get',
-          path: 'encounters',
-          request: {
-            schemas: {
-              'application/json': encounterHTTP,
-            },
-          },
+          path: 'encounters'
         },
       },
     ],
@@ -63,6 +61,7 @@ export const encounterUpdate = {
     events: [
       {
         http: {
+          cors: true,
           authorizer: 'authHandler',
           method: 'patch',
           path: 'encounters/{id}'
@@ -76,6 +75,7 @@ export const encounterDelete = {
     events: [
       {
         http: {
+          cors: true,
           authorizer: 'authHandler',
           method: 'delete',
           path: 'encounters/{id}'

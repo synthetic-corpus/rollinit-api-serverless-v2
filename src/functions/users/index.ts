@@ -6,6 +6,13 @@ export const userCreate = {
   events: [
     {
       http: {
+        cors: {
+          origin: "*",
+          headers: [
+            'Content-Type',
+            'Authorization'
+          ]
+        },
         authorizer: 'authHandler',
         method: 'post',
         path: 'user',
@@ -24,6 +31,13 @@ export const userRetrieve = {
     events: [
       {
         http: {
+          cors: {
+            origin: "*",
+            headers: [
+              'Content-Type',
+              'Authorization'
+            ]
+          },
           authorizer: 'authHandler',
           method: 'get',
           path: 'user/self'
@@ -37,6 +51,13 @@ export const userUpdate = {
     events: [
       {
         http: {
+          cors: {
+            origin: "*",
+            headers: [
+              'Content-Type',
+              'Authorization'
+            ]
+          },
           authorizer: 'authHandler',
           method: 'patch',
           path: 'user/self'
@@ -50,6 +71,13 @@ export const userDelete = {
     events: [
       {
         http: {
+          cors: {
+            origin: "*",
+            headers: [
+              'Content-Type',
+              'Authorization'
+            ]
+          },
           authorizer: 'authHandler',
           method: 'delete',
           path: 'user/self'

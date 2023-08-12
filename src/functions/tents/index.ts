@@ -7,6 +7,7 @@ export const tentCreate = {
   events: [
     {
       http: {
+        cors: true,
         authorizer: 'authHandler',
         method: 'post',
         path: 'tent',
@@ -26,6 +27,7 @@ export const tentRetrieve = {
     events: [
       {
         http: {
+          cors: true,
           authorizer: 'authHandler',
           method: 'get',
           path: 'tent/{id}',
@@ -45,14 +47,10 @@ export const tentRetrieve = {
     events: [
       {
         http: {
+          cors: true,
           authorizer: 'authHandler',
           method: 'get',
-          path: 'tent',
-          request: {
-            schemas: {
-              'application/json': tentHTTP,
-            },
-          },
+          path: 'tent'
         },
       },
     ],
@@ -63,9 +61,15 @@ export const tentUpdate = {
     events: [
       {
         http: {
+          cors: true,
           authorizer: 'authHandler',
           method: 'patch',
-          path: 'tent/{id}'
+          path: 'tent/{id}',
+          request: {
+            schemas: {
+              'application/json': tentHTTP,
+            },
+          },
         },
       },
     ],
@@ -76,6 +80,7 @@ export const tentDelete = {
     events: [
       {
         http: {
+          cors: true,
           authorizer: 'authHandler',
           method: 'delete',
           path: 'tent/{id}'

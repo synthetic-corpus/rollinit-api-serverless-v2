@@ -8,6 +8,8 @@ export const handler = async (event: APIGatewayTokenAuthorizerEvent): Promise<AP
         // console.log(event.authorizationToken)
         const jwtToken = await verifyToken(event.authorizationToken)
         //console.log(jwtToken)
+        console.log("Auth Token succeeded. Permission granted to: ",jwtToken.sub)
+        console.log("Completed JWT Token: ",jwtToken)
         return {
           principalId: jwtToken.sub,
           policyDocument: {
@@ -22,6 +24,7 @@ export const handler = async (event: APIGatewayTokenAuthorizerEvent): Promise<AP
           }
         }
       } catch (e) {
+        console.log("Authentication failed with: ",e)
         return {
           principalId: 'user',
           policyDocument: {
